@@ -3,25 +3,23 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>commuter-crowd</h1>
 
   {{> hello}}
 </body>
 
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+  {{#each transports}}
+    <h2>{{name}}</h2>
+    <select id="lines">
+      <option>Select Line</option>
+      {{#each lines}}
+        <option value="{{name}}">{{name}}</option>
+      {{/each}}
+    </select>
+  {{/each}}
 
-  <ul>
-    {{#each transports}}
-      <li>{{name}}</li>
-      <li>
-        <select id="lines">
-          {{#each lines}}
-            <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
-      </li>
-    {{/each}}
-  </ul>
+  {{#if line}}
+    <h3>{{line}}</h3>
+  {{/if}}
 </template>

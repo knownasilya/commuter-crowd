@@ -2,22 +2,22 @@ var Transport = new Mongo.Collection('transport');
 
 if (Meteor.isClient) {
   // counter starts at 0
-  Session.setDefault('counter', 0);
+  //Session.setDefault('counter', 0);
 
   Template.hello.helpers({
     transports: function () {
       return Transport.find({});
     },
 
-    counter: function () {
-      return Session.get('counter');
+    line: function () {
+      return Session.get('selectedLine');
     }
   });
 
   Template.hello.events({
-    'click button': function () {
+    'change #lines': function (event) {
       // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+      Session.set('selectedLine', event.target.value);
     }
   });
 }
@@ -55,3 +55,15 @@ if (Meteor.isServer) {
     });
   });
 }
+
+Handlebars.registerHelper('debug', function(optionalValue) {
+  console.log('Current Context');
+  console.log('====================');
+  console.log(this);
+
+  if (optionalValue) {
+    console.log('Value');
+    console.log('====================');
+    console.log(optionalValue);
+  }
+});
